@@ -28,29 +28,18 @@ gem_group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'rb-fsevent' if `uname` =~ /Darwin/
-end 
+end
 
-gem_group :test do 
-  gem 'faker' 
+gem_group :test do
+  gem 'faker'
   gem 'capybara'
-  gem 'launchy' 
+  gem 'launchy'
   gem 'database_cleaner',  version: '< 1.1.0'
 end
 
 
 run 'bundle exec guard init rspec'
 generate 'rspec:install'
-
-inside 'config' do
-  run <<-CMD
-gsed -i '/class Application < Rails::Application/a\\
-\t\t# Configure generators values. Many other options are available, be sure to check the documentation.\\
-\t\tconfig.generators do |g|\\
-\t\t\tg.test_framework :rspec, fixture: true, view_specs: false, helper_specs: false, routing_specs: false\\
-\t\t\tg.fixture_replacement :factory_girl, dir: 'spec/factories'\\
-\t\tend' application.rb
-CMD
-end
 
 inside 'spec' do
   run %Q{
