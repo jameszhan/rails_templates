@@ -12,9 +12,11 @@ end
 
 inside 'app/assets/javascripts' do
   run "gsed -i '/require_tree/d' application.js"
+  run "gsed -i '/^\\/\\/= require jquery$/a//= require angular' application.js"
 end
 
 gem 'simple_form'
+gem 'angularjs-rails'
 
 gem_group :development do
   gem 'pry'
@@ -34,7 +36,7 @@ gem_group :test do
   gem 'faker'
   gem 'capybara'
   gem 'launchy'
-  gem 'database_cleaner',  version: '< 1.1.0'
+  gem 'database_cleaner'#,  version: '< 1.1.0'
 end
 
 
